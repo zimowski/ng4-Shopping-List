@@ -1,0 +1,70 @@
+{
+  "list": [
+    {
+      "name": "My simple shopping list",
+      "date": "1503870795213",
+      "active_items": 3,
+      "is_active": false,
+      "items": 8,
+      "id": 1
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "list_id": 1,
+      "name": "Cucambers",
+      "date": "1503870805962",
+      "is_active": false
+    },
+    {
+      "id": 2,
+      "list_id": 1,
+      "name": "Tomatoes",
+      "date": "1503870811478",
+      "is_active": true
+    },
+    {
+      "id": 3,
+      "list_id": 1,
+      "name": "Potatoes",
+      "date": "1503870816109",
+      "is_active": false
+    },
+    {
+      "id": 4,
+      "list_id": 1,
+      "name": "AAA batteries",
+      "date": "1503870829775",
+      "is_active": false
+    },
+    {
+      "id": 5,
+      "list_id": 1,
+      "name": "Water",
+      "date": "1503870837974",
+      "is_active": false
+    },
+    {
+      "id": 6,
+      "list_id": 1,
+      "name": "Milk",
+      "date": "1503870858481",
+      "is_active": true
+    },
+    {
+      "id": 7,
+      "list_id": 1,
+      "name": "Onion",
+      "date": "1503870861602",
+      "is_active": false
+    },
+    {
+      "id": 8,
+      "list_id": 1,
+      "name": "Peppers",
+      "date": "1503870868481",
+      "is_active": true
+    }
+  ]
+}

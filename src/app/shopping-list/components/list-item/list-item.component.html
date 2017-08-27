@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="header">{{ item.name }}</div>
+  <div class="meta">
+    <p><i class="icon calendar"></i> {{ item.date | date: 'dd-MM-y HH:mm' }}</p>
+  </div>
+  <div class="extra">
+    <div *ngIf="item.items > 0" class="ui mini teal label">
+      {{ item.items }} item{{ item.items > 1 ? 's' : '' }} on list
+    </div>
+    <div *ngIf="item.items > 0" class="ui mini yellow label">
+      {{ item.active_items }} item{{ item.active_items > 1 ? 's' : '' }} to finish
+    </div>
+    <div *ngIf="item.items === 0" class="ui mini yellow label">
+      Open to add something on the list
+    </div>
+  </div>
+</div>
+<div class="content left floated">
+  <sui-progress *ngIf="item.items > 0" class="ui small teal progress" [ngClass]="{ 'active': item.active_items }"
+                [value]="item.items - item.active_items"
+                [showProgress]="true"
+                [maximum]="item.items"
+                [precision]="0"
+                [autoSuccess]="true">
+  </sui-progress>
+  <div class="ui small right floated icon button"
+       suiPopup popupText="Remove this shopping list"
+       popupInverted [popupPlacement]="'left bottom'"
+       (click)="remove(item, $event)">
+    <i class="ui icon trash"></i>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<app-header>
+  <a [routerLink]="['/']" class="item header" header>
+    <i class="ui icon caret left"></i>
+    Details of {{ shoppingList.name }}
+  </a>
+  <div class="ui right teal inverted menu" options>
+    <a class="icon item" (click)="renamePanel = true" suiPopup popupText="Rename shopping list" popupInverted [popupPlacement]="'left bottom'">
+      <i class="ui icon pencil"></i>
+    </a>
+    <a class="icon item" (click)="removeList()" suiPopup popupText="Remove shopping list" popupInverted [popupPlacement]="'left bottom'">
+      <i class="ui icon trash"></i>
+    </a>
+    <a class="icon item" (click)="refreshShoppingList();getItemsList()" suiPopup popupText="Refresh shopping list" popupInverted [popupPlacement]="'left bottom'">
+      <i class="ui icon refresh"></i>
+    </a>
+  </div>
+</app-header>
+
+<app-form-list
+  [hidden]="!renamePanel"
+  [type]="'update'"
+  [title]="'Rename shopping list'"
+  [parameters]="shoppingList"
+  (onSuccess)="renamePanel = false;refreshShoppingList();getItemsList();"
+  (onCancel)="renamePanel = false"></app-form-list>
+
+<div class="ui container">
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui header">
+        {{ shoppingList.name }}
+      </div>
+    </div>
+    <div class="ui secondary segment">
+      <div class="ui stackable two column grid">
+        <div class="row">
+          <div class="column center aligned">
+            <i class="ui icon calendar"></i> {{ shoppingList.date | date: 'dd-MM-y HH:mm' }}
+          </div>
+          <div class="column center aligned">
+            <span class="ui tiny circular teal label">{{ shoppingList.items }}</span>
+            item{{ (shoppingList.items === 1) ? '' : 's' }} on list
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment">
+      <app-loader [active]="loading"></app-loader>
+      <div class="ui divided middle aligned selection list">
+        <app-details-item
+          *ngFor="let item of itemsList"
+          [item]="item"
+          (onUpdate)="changeStateCounter($event)"
+          (onRemove)="changeCounter($event, false)"
+          class="item"
+        ></app-details-item>
+        <div class="ui nolists message" *ngIf="!shoppingList.items || shoppingList.items === 0">
+          You don't have any items yet.
+        </div>
+      </div>
+    </div>
+    <div class="ui segment" [hidden]="!formOpen">
+      <app-form-details
+        [type]="'create'"
+        [title]="'Set new item'"
+        [listId]="shoppingList.id"
+        (onCreate)="changeCounter('active', true)"
+        ></app-form-details>
+    </div>
+    <div class="ui center aligned segment" *ngIf="!formOpen">
+      <button class="ui circular teal icon button"
+           (click)="formOpen = !formOpen"
+           suiPopup popupText="Add new item" popupInverted [popupPlacement]="'top'">
+        <i class="ui icon plus"></i>
+      </button>
+    </div>
+  </div>
+</div>

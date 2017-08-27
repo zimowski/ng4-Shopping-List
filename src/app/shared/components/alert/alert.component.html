@@ -1,0 +1,6 @@
+<div *ngFor="let alert of alerts"
+     class="ui message {{ cssClass(alert) }}">
+  <div class="header">{{ alert.title }}</div>
+  <i class="close icon" (click)="removeAlert(alert)"></i>
+  <p>{{ alert.message }}</p>
+</div>

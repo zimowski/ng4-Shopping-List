@@ -1,0 +1,21 @@
+<form [formGroup]="shoppingForm" class="ui form">
+  <div class="ui segment">
+    <h4 class="ui dividing header">{{ title }}</h4>
+    <div class="required field" [ngClass]="{ 'error': !shoppingForm.get('name').valid && shoppingForm.get('name').dirty }">
+      <label>Shopping list name</label>
+      <input formControlName="name" placeholder="My new shopping list" type="text">
+      <div *ngIf="!shoppingForm.get('name').valid && shoppingForm.get('name').dirty" class="ui pointing red basic label">
+        This field is required and must contain 3-40 characters
+      </div>
+    </div>
+    <button class="ui basic teal button"
+            (click)="submit()"
+            [disabled]="loading || shoppingForm.invalid"
+            [ngClass]="{ 'loading': loading }">
+      <i class="ui icon checkmark"></i> Submit
+    </button>
+    <button class="ui basic button" (click)="cancel()" [disabled]="loading">
+      Cancel
+    </button>
+  </div>
+</form>

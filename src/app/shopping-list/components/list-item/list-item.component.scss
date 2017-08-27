@@ -1,0 +1,9 @@
+.content {
+  width: 50% !important;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 100% !important;
+  }
+}

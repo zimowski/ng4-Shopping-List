@@ -1,0 +1,54 @@
+<app-header>
+  <div class="item header" header>
+    Welcome in shopping list manager
+  </div>
+  <div class="ui right teal inverted menu" options>
+    <a (click)="showFormPanel = true"
+       class="icon item"
+       suiPopup popupText="Add new shopping list" popupInverted [popupPlacement]="'left bottom'">
+      <i class="ui icon plus"></i>
+    </a>
+  </div>
+</app-header>
+
+<app-total-progressbar
+  [value]="total - totalActive"
+  [maximum]="total"
+  [is_active]="totalActive"></app-total-progressbar>
+
+<app-form-list
+  [hidden]="!showFormPanel"
+  [type]="'create'"
+  [title]="'Create new shopping list'"
+  (onSuccess)="listCreatedSuccessfully($event)"
+  (onCancel)="showFormPanel = false"></app-form-list>
+
+<div class="ui segments">
+  <div class="ui yellow secondary segment" *ngIf="totalActive > 0">
+    <i class="ui icon warning sign"></i>
+    You have <span class="ui circular teal tiny label">{{ totalActive }}</span> incomplete shopping lists.
+  </div>
+  <div class="segment" *ngIf="shoppingList && shoppingList.length > 0">
+    <div class="ui borderless two item menu" style="border: none;">
+      <a class="item" (click)="loadAll()" [ngClass]="{ 'active': allTab }">
+        All lists <span class="ui circular teal tiny label">{{ total }}</span>
+      </a>
+      <a class="item" (click)="loadActive()" [ngClass]="{ 'active': !allTab }">
+        Incomplete lists <span class="ui circular yellow tiny label">{{ totalActive }}</span>
+      </a>
+    </div>
+  </div>
+  <div class="ui segment">
+    <app-loader [active]="loading"></app-loader>
+    <div class="ui divided link items" [hidden]="!shoppingList || shoppingList.length === 0">
+      <app-list-item class="item"
+                     [item]="item"
+                     (removedItem)="refresh()"
+                     *ngFor="let item of shoppingList"
+                     [routerLink]="['/details', item.id]"></app-list-item>
+    </div>
+    <div class="ui nolists message" *ngIf="!shoppingList || shoppingList.length === 0">
+      You don't have any shopping list.
+    </div>
+  </div>
+</div>

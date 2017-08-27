@@ -1,0 +1,12 @@
+<div class="ui bottom fixed vertical menu" style="width: 100%">
+  <div class="item">
+    <sui-progress class="ui teal tiny progress" [ngClass]="{ 'active': is_active }"
+                  [value]="value"
+                  [showProgress]="true"
+                  [maximum]="maximum"
+                  [precision]="0"
+                  [autoSuccess]="true">
+      {{ (progress() || 0) | percent }} completed - {{ value || 0 }}/{{ maximum || 0 }}
+    </sui-progress>
+  </div>
+</div>

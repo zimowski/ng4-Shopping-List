@@ -1,0 +1,21 @@
+.checkbox, .loader {
+  margin-top: 6px !important;
+}
+
+.loader {
+  margin: 6px 10px 0 10px !important;
+}
+
+.header {
+  display: inline-block !important;
+  cursor: pointer;
+}
+
+.no-cursor {
+  cursor: default !important;
+}
+
+.description {
+  display: inline-block !important;
+  opacity: 0.5;
+}

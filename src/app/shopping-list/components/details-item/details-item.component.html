@@ -1,0 +1,36 @@
+<div class="middle aligned content"
+     (click)="item.is_active = !item.is_active;update()"
+     *ngIf="!editPanel">
+  <div class="ui left floated checkbox">
+    <input type="checkbox" [checked]="!item.is_active">
+    <label class="header">{{ item.name }}</label>
+    <div class="description">
+      <i class="ui icon calendar"></i> {{ item.date | date: 'dd-MM-y HH:mm' }}
+    </div>
+  </div>
+  <div class="ui right floated tiny buttons">
+    <div class="ui basic teal icon button"
+         (click)="toggleEditPanel($event)"
+         suiPopup popupText="Edit item" popupInverted [popupPlacement]="'left'">
+      <i class="ui icon pencil"></i>
+    </div>
+    <div class="ui basic red icon button"
+         (click)="remove($event)"
+         suiPopup popupText="Remove item" popupInverted [popupPlacement]="'left'">
+      <i class="ui icon trash"></i>
+    </div>
+  </div>
+  <div class="ui inline tiny loader right floated"
+       [ngClass]="{ 'active': loading }"></div>
+</div>
+<div class="ui segment no-cursor" [hidden]="!editPanel">
+  <app-form-details
+    [type]="'uodate'"
+    [title]="'Edit item ' + item.name"
+    [parameters]="item"
+    [listId]="item.list_id"
+    (onUpdate)="updatedItem($event)"
+    (onCancel)="toggleEditPanel($event)"
+  ></app-form-details>
+</div>
+

@@ -1,0 +1,22 @@
+<form [formGroup]="itemForm" class="ui form">
+  <h4 class="ui dividing header">{{ title }}</h4>
+  <div class="required field">
+    <label class="">Item name</label>
+    <input formControlName="name" placeholder="Set item name" type="text">
+    <div *ngIf="!itemForm.get('name').valid && itemForm.get('name').dirty" class="ui pointing red basic label">
+      This field is required and must contain 3-40 characters
+    </div>
+  </div>
+  <button class="ui basic teal button"
+          (click)="save()"
+          [disabled]="itemForm.invalid || loading"
+          [ngClass]="{ 'loading': loading }">
+    <i class="ui checkmark icon"></i> Submit
+  </button>
+  <button class="ui basic button"
+          (click)="cancel()"
+          *ngIf="type === 'create'"
+          [disabled]="loading">
+    Cancel
+  </button>
+</form>
